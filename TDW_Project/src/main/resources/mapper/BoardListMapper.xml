@@ -6,5 +6,7 @@
 	<select id="selectBoardList" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT *
 		FROM BOARD_CATEGORY
+		
+		
 	</select>
 </mapper>

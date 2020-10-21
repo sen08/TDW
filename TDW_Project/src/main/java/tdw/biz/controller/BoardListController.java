@@ -22,7 +22,7 @@ public class BoardListController {
 	@RequestMapping("/index")
 	public ModelAndView main(ModelAndView v, @RequestParam Map<String, Object> params, HttpServletRequest request) throws Exception {
 		
-		List<Map<String,Object>> listSample = boardListService.selectBoardList(params);
+		List<Map<String, Object>> listSample = boardListService.selectBoardList(params);
 		System.out.println("==== return list ===== " + listSample);
 		v.setViewName("index");
 		return v;

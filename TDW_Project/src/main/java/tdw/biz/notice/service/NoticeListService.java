@@ -1,18 +1,10 @@
 package tdw.biz.notice.service;
 
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import tdw.com.mapper.CommonMapper;
 
 @Service
 public class NoticeListService {
 
-	@Autowired
-	CommonMapper commonMapper;
 
 	private static final String SQL_PREFIX = "biz.boardList.";
 

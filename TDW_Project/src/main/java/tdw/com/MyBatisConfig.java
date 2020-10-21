@@ -16,22 +16,22 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class MyBatisConfig {
 
 	
-//	@Bean
-//	public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception{
-//	        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-//	        sqlSessionFactoryBean.setDataSource(dataSource);
-//	        //applicationContext.getResources("classpath:/mapper/*Mapper.xml");
-//	        Resource[] arrResource = new PathMatchingResourcePatternResolver()
-//	                .getResources("classpath:mapper/**/*.xml");
-//	        sqlSessionFactoryBean.setMapperLocations(arrResource);
-//	        sqlSessionFactoryBean.getObject().getConfiguration().setMapUnderscoreToCamelCase(true);
-//	        return sqlSessionFactoryBean.getObject();
-//	    }
-//	
-//	 @Bean
-//	    public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) throws Exception {
-//	        return new SqlSessionTemplate(sqlSessionFactory);
-//	    }
-//	
-//	 
+	@Bean
+	public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception{
+	        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+	        sqlSessionFactoryBean.setDataSource(dataSource);
+	        //applicationContext.getResources("classpath:/mapper/*Mapper.xml");
+	        Resource[] arrResource = new PathMatchingResourcePatternResolver()
+	                .getResources("classpath:mapper/**/*.xml");
+	        sqlSessionFactoryBean.setMapperLocations(arrResource);
+	        sqlSessionFactoryBean.getObject().getConfiguration().setMapUnderscoreToCamelCase(true);
+	        return sqlSessionFactoryBean.getObject();
+	    }
+	
+	 @Bean
+	    public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) throws Exception {
+	        return new SqlSessionTemplate(sqlSessionFactory);
+	    }
+	
+	 
 }
