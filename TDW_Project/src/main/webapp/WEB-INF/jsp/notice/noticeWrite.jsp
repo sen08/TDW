@@ -9,16 +9,15 @@
 </head>
 <script type="text/javascript">
 function save() {
-	
+	alert("저장되었답니당~?");
 }
 </script>
 <body>
-<form action="noticeDetail">
 	<h1> 공지사항 작성</h1>
 	<!-- 저장 누르면 완료알림창 뜨고 목록으로 돌아가기 -->
 	<!-- <button onclick="save();">저장</button> -->
 	<!--  -->
-	<form role="form" method="post" action="writeNotice">
+	<form role="form" method="post" action="noticeList">
 		<table>
 			<tbody>
 				<tr>
@@ -38,9 +37,11 @@ function save() {
 				</tr>
 				<tr>
 					<td>						
-						<button type="submit">작성</button>
+						<button type="submit" onclick="save()">작성</button>
 					</td>
 				</tr>			
+				<input type="hidden" id="gubun" name="gubun" value="2"/>
+				<input type="hidden" id="BOARD_ID" name="BOARD_ID" value="01"/>
 			</tbody>			
 		</table>
 	</form>

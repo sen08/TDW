@@ -9,39 +9,6 @@
 </head>
 <script type="text/javascript">
 function gotoWrite() {
-	
-	/*	
-	$('#finalIssue').attr('disabled','disabled');
-
-	var param = {cponPolicList:list};
-
-	 $.ajax({
-		url: "/vipcoupon/getcoupons/issueCouponDiy.do",
-		type: "POST",
-		contentType: "application/json;charset=UTF-8",
-		dataType: "json",
-		data: JSON.stringify(param),
-		success: function (data, textStatus, jqXHR) {
-
-			var dataList = data.result; //리턴 값 받아오기
-
-			if(dataList.statCd == "success"){
-				var options = {};
-				options.msg = '쿠폰북이 발급되었습니다.';
-				options.callback  = fn_goPage;
-				gfn_alertMsgBox(options);
-				return false;
-			}
-		},
-		complete: function(xhr){
-			clearLmt();     		//중복제한 초기화
-		},
-		error: function(xhr,status,error){
-			 var err = JSON.parse(xhr.responseText);
-			 alert(xhr.status);
-			 alert(err.message);
-		}
-	}); */
 }
 </script>
 <body>
@@ -52,7 +19,7 @@ function gotoWrite() {
 <!-- 04.  -->
 <!-- 05.  -->
 
-	<form role="form">			
+	<form role="form">		
 		<table border="1">
 			<tr>
 				<th>순번</th>
@@ -62,9 +29,9 @@ function gotoWrite() {
 			</tr>
 			<c:forEach var="test" items="${dsTable}">
 				<tr>
-					<td>${test.CONTENT_SN}</td>
+					<td>${test.ROW_NUM}</td>
 					<td>
-						<a href="noticeDetail?CONTENT_SN=${test.CONTENT_SN}">
+						<a href="noticeDetail?CONTENT_SN=${test.CONTENT_SN}&BOARD_ID=${test.BOARD_ID}">
 							${test.CONTENT_TITLE}
 						</a>
 					</td>
@@ -74,7 +41,6 @@ function gotoWrite() {
 			</c:forEach>
 		</table>	
 	</form>
-<a href="noticeWrite">글쓰기</a>			
-<a href="noticeDetail">상세보기</a>		
+<a href="noticeWrite">글쓰기</a>		
 </body>
 </html>

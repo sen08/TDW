@@ -25,7 +25,18 @@ public class NoticeService {
 		return comMapper.selectList(this.SQL_PREFIX + ".selectBoardList", param);
 	
 	}
+
+	/*	
+	 * 게시판 조회수 증가
+	 * 
+	 * @param param
+	 * @return
+	 */
+	public List<Map<String, Object>> updateNoticeHits(Map<String,Object> param) throws Exception{
+		return comMapper.selectList(this.SQL_PREFIX + ".updateNoticeHits", param);
 	
+	}
+
 	/*	
 	 * 게시판 상세 조회
 	 * 
@@ -44,8 +55,18 @@ public class NoticeService {
 	 * @return
 	 */
 	public int insertNoticeList(Map<String,Object> param) throws Exception{
-		System.out.println("@@@@@@"+param);
-		return comMapper.insert(this.SQL_PREFIX + ".insertNoticeBoard", param);
+		return comMapper.update(this.SQL_PREFIX + ".insertNoticeBoard", param);
 	
+	}
+	
+	/*	
+	 * 공지사항 삭제
+	 * 
+	 * @param param
+	 * @return
+	 */
+	public int deleteNotice(Map<String,Object> param) throws Exception{
+		System.out.println("1111111");
+		return comMapper.delete(this.SQL_PREFIX + ".deleteNotice", param);
 	}
 }

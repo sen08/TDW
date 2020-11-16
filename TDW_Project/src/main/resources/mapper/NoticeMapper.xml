@@ -4,16 +4,20 @@
 <mapper namespace="tdw.biz.NoticeMapper">
 
 	<select id="selectBoardList" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT CONTENT_SN, CONTENT_TITLE, MEMBER_ID, CONTENT_HITS
+		SELECT ROW_NUMBER() OVER(ORDER BY CONTENT_SN DESC) ROW_NUM, BOARD_ID, CONTENT_SN, CONTENT_TITLE, MEMBER_ID, CONTENT_HITS
 		FROM BOARD_CONTENTS
-		ORDER BY CONTENT_SN ASC
+		WHERE BOARD_ID = #{BOARD_ID}
+		ORDER BY CONTENT_SN DESC
 	</select>
+	
 	<select id="selectBoardDetail" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT *
 		FROM BOARD_CONTENTS
 		WHERE 1=1
 		AND CONTENT_SN = #{CONTENT_SN}
+		AND BOARD_ID = #{BOARD_ID}
 	</select>
+	
 	<insert id="insertNoticeBoard" parameterType="java.util.Map">
 		INSERT INTO board_contents (
 		    BOARD_ID,
@@ -23,16 +27,31 @@
 		    CONTENT_HITS,
 		    MEMBER_ID,
 		    FST_REG_DT,
-		    UPT_REG_DT
+		    UPT_REG_DT,
+		    CONTENT_IMG_PATH
 		) VALUES (
 		    '01',
-		    '01',
-		    #{CONTENT_TITLE},
-		    #{CONTENT_DETAIL},
+		    sq_contentsn.nextval,
+		    #{title},
+		    #{content},
 		    0,
-		    #{MEMBER_ID},
+		    #{writer},
 		    SYSDATE,
-		    SYSDATE
+		    SYSDATE,
+		    null
 		)
 	</insert>
+	
+	<insert id="updateNoticeHits" parameterType="java.util.Map">
+		UPDATE board_contents
+        SET CONTENT_HITS = CONTENT_HITS + 1
+        WHERE BOARD_ID=#{BOARD_ID}
+        AND CONTENT_SN=#{CONTENT_SN}
+	</insert>
+	
+	<delete id="deleteNotice" parameterType="java.util.Map">
+		DELETE FROM BOARD_CONTENTS
+        WHERE BOARD_ID=#{BOARD_ID}
+        AND CONTENT_SN=#{CONTENT_SN}
+	</delete>
 </mapper>

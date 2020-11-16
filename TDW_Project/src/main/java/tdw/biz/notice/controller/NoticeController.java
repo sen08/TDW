@@ -22,18 +22,31 @@ public class NoticeController {
 	@Autowired
 	NoticeService noticeService;
 
+	/*
+	 * 공지사항 목록조회 페이지
+	 * 
+	 * */
 	@RequestMapping("/notice/noticeList")	//url에 이 주소입력하셈
 	public ModelAndView main(ModelAndView model, @RequestParam Map<String, Object> params, HttpServletRequest request) throws Exception {
 
-		List<Map<String, Object>> list = noticeService.selectNoticeList(params);
-		System.out.println("==== return list ===== ");
-
-		model.addObject("dsTable", list);
+		System.out.println("==== param ===== "+params);
+		String gubun = (String) params.get("gubun");
 		
+		if(gubun.equals("2")) {	//글쓰기
+			System.out.println("==== Writed ===== ");
+			noticeService.insertNoticeList(params);
+		}
+			List<Map<String, Object>> list = noticeService.selectNoticeList(params);
+			System.out.println("==== return list ===== "+list);
+			model.addObject("dsTable", list);
 		model.setViewName("/notice/noticeList");
 		return model;
 	}	
 
+	/*
+	 * 공지사항 작성 페이지
+	 * 
+	 * */
 	@RequestMapping("/notice/noticeWrite")	//url에 이 주소입력하셈
 	public ModelAndView noticeWritePage(ModelAndView model, @RequestParam Map<String, Object> params, HttpServletRequest request) throws Exception {
 		
@@ -43,28 +56,44 @@ public class NoticeController {
 		model.setViewName("/notice/noticeWrite");
 		return model;
 	}	
-	
+
+	/*
+	 * 공지사항 상세보기 페이지
+	 * 
+	 * */
 	@RequestMapping("/notice/noticeDetail")	//url에 이 주소입력하셈
 	public ModelAndView noticeDetailPage(ModelAndView model, @RequestParam Map<String, Object> params, HttpServletRequest request) throws Exception {
 
+		//조회수 증가
+		noticeService.updateNoticeHits(params);
+		
 		List<Map<String, Object>> list = noticeService.selectNoticeDetail(params);
 		System.out.println("==== Detail ===== "+list);
-
+		
 		model.addObject("dsTable", list);
 		
 		model.setViewName("/notice/noticeDetail");
 		return model;
 	}	
-	@RequestMapping(value = "/notice/noticeWrite", method = RequestMethod.POST)	//url에 이 주소입력하셈
-	public ModelAndView insertNoticeBoard(ModelAndView model, @RequestParam Map<String, Object> params, HttpServletRequest request) throws Exception {
 
-		System.out.println("==== Write1 ===== ");
-		noticeService.insertNoticeList(params);
-		System.out.println("==== Write2 ===== ");
-
-		//model.addObject("dsTable", list);
+	/*
+	 * 공지사항 삭제
+	 * 
+	 * */
+	@RequestMapping("/notice/deleteNotice")	//url에 이 주소입력하셈
+	public ModelAndView deleteNotice(ModelAndView model, @RequestParam Map<String, Object> params, HttpServletRequest request) throws Exception {
 		
-		//model.setViewName("/notice/noticeDetail");
+		System.out.println("==== delete ====");
+		
+		//삭제
+		noticeService.deleteNotice(params);
+		
+
+		List<Map<String, Object>> list = noticeService.selectNoticeList(params);
+		System.out.println("==== return list ===== "+list);
+		model.addObject("dsTable", list);
+		model.setViewName("/notice/noticeList");
 		return model;
 	}	
+
 }
