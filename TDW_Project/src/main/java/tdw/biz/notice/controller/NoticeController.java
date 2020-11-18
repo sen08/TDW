@@ -35,6 +35,9 @@ public class NoticeController {
 		if(gubun.equals("2")) {	//글쓰기
 			System.out.println("==== Writed ===== ");
 			noticeService.insertNoticeList(params);
+		}else if(gubun.equals("3")) { //수정
+			System.out.println("==== Updated ===== ");
+			noticeService.updateNoticeList(params);
 		}
 			List<Map<String, Object>> list = noticeService.selectNoticeList(params);
 			System.out.println("==== return list ===== "+list);
@@ -50,10 +53,21 @@ public class NoticeController {
 	@RequestMapping("/notice/noticeWrite")	//url에 이 주소입력하셈
 	public ModelAndView noticeWritePage(ModelAndView model, @RequestParam Map<String, Object> params, HttpServletRequest request) throws Exception {
 		
-		System.out.println("==== write ====");
-		
-		
-		model.setViewName("/notice/noticeWrite");
+		String writeGubun = (String) params.get("writeGubun");
+		if (writeGubun.equals("write")) {		
+			//작성
+			System.out.println("==== write ====");
+			model.setViewName("/notice/noticeWrite");
+		}else {
+			//수정
+			List<Map<String, Object>> list = noticeService.selectNoticeDetail(params);
+			
+			System.out.println("==== update ====");
+
+			model.addObject("dsTable", list);
+			
+			model.setViewName("/notice/noticeWrite");
+		}
 		return model;
 	}	
 

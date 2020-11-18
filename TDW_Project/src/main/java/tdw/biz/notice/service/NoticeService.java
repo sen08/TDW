@@ -55,7 +55,18 @@ public class NoticeService {
 	 * @return
 	 */
 	public int insertNoticeList(Map<String,Object> param) throws Exception{
-		return comMapper.update(this.SQL_PREFIX + ".insertNoticeBoard", param);
+		return comMapper.insert(this.SQL_PREFIX + ".insertNoticeBoard", param);
+	
+	}
+
+	/*	
+	 * 공지사항 수정
+	 * 
+	 * @param param
+	 * @return
+	 */
+	public int updateNoticeList(Map<String,Object> param) throws Exception{
+		return comMapper.update(this.SQL_PREFIX + ".updateNoticeBoard", param);
 	
 	}
 	

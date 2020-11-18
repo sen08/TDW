@@ -18,13 +18,24 @@ $(document).ready(function(){
 		var answer;
 		answer = confirm("데이터를 삭제하시겠습니까?");
 		if(answer == true){
-
-			alert("삭제@");
 			formObj.attr("action", "deleteNotice");
 			formObj.attr("method", "post");
 			formObj.submit();
 		}
 	})
+	
+	//수정
+	$(".update_btn").on("click", function(){
+		var answer;
+
+		answer = confirm("데이터를 수정하시겠습니까?");
+		if(answer == true){
+			formObj.attr("action", "noticeWrite");
+			formObj.attr("method", "post");
+			formObj.submit();
+		}
+	})
+	
 	//뒤로가기
 	 $(".back_btn").on("click", function(){
 		location.href = "noticeList?gubun=1&BOARD_ID=01";
@@ -45,6 +56,7 @@ function deleteDetail(){
 		<input type="hidden" id="writer" name="writer" value="${test.MEMBER_ID}">
 		<input type="hidden" id="hits" name="hits" value="${test.CONTENT_HITS}">
 		<input type="hidden" id="BOARD_ID" name="BOARD_ID" value="${test.BOARD_ID}">
+		<input type="hidden" id="writeGubun" name="writeGubun" value="update">
 		<table>
 			<tbody>
 				<tr>
@@ -76,6 +88,7 @@ function deleteDetail(){
 		</table>
 	</form>
 	<button type="submit" class="back_btn">뒤로가기</button>
+	<button type="submit" class="update_btn">수정</button>
 	<button type="submit" class="delete_btn">삭제</button>
 	</c:forEach>
 <%

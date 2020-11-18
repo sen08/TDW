@@ -42,12 +42,19 @@
 		)
 	</insert>
 	
-	<insert id="updateNoticeHits" parameterType="java.util.Map">
+	<update id="updateNoticeBoard" parameterType="java.util.Map">
+		UPDATE board_contents
+        SET CONTENT_TITLE = #{CONTENT_TITLE}, CONTENT_DETAIL = #{CONTENT_DETAIL}, MEMBER_ID = #{MEMBER_ID}
+        WHERE BOARD_ID=#{BOARD_ID}
+        AND CONTENT_SN=#{CONTENT_SN}
+	</update>
+	
+	<update id="updateNoticeHits" parameterType="java.util.Map">
 		UPDATE board_contents
         SET CONTENT_HITS = CONTENT_HITS + 1
         WHERE BOARD_ID=#{BOARD_ID}
         AND CONTENT_SN=#{CONTENT_SN}
-	</insert>
+	</update>
 	
 	<delete id="deleteNotice" parameterType="java.util.Map">
 		DELETE FROM BOARD_CONTENTS

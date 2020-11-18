@@ -41,6 +41,6 @@ function gotoWrite() {
 			</c:forEach>
 		</table>	
 	</form>
-<a href="noticeWrite">글쓰기</a>		
+<a href="noticeWrite?writeGubun=write">글쓰기</a>		
 </body>
 </html>
